@@ -19,5 +19,27 @@
       "mousse",
       "planche"
     ]
+  },
+  "148": {
+    "theme": "plage",
+    "words": [
+      "mer",
+      "dune",
+      "sable",
+      "parasol",
+      "plagiste",
+      "serviette"
+    ]
+  },
+  "149": {
+    "theme": "espace",
+    "words": [
+      "lune",
+      "cosmos",
+      "étoile",
+      "galaxie",
+      "planète",
+      "satellite"
+    ]
   }
 }
