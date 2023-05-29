@@ -1,7 +1,5 @@
 <script>
 	import { confetti } from "@neoconfetti/svelte";
-	import { enhance } from "$app/forms";
-	import { reduced_motion } from "./reduced-motion";
 	import Logo from "$lib/assets/Flordle.png";
 
 	import { game } from "./game-state";
@@ -12,10 +10,10 @@
 	$: won = $game.answers.at(-1) === "x".repeat($game.wordLength);
 
 	/** The index of the current guess */
-	$: i = won ? -1 : $game.answers.length;
+	$: currentIndex = won ? -1 : $game.answers.length;
 
 	/** Whether the current guess can be submitted */
-	$: submittable = $game.guesses[i]?.length === $game.wordLength;
+	$: submittable = $game.guesses[currentIndex]?.length === $game.wordLength;
 
 	/**
 	 * A map of classnames for all letters that have been guessed,
@@ -55,13 +53,13 @@
 	 * if client-side JavaScript is enabled
 	 */
 	function update(event) {
-		const guess = $game.guesses[i];
+		const guess = $game.guesses[currentIndex];
 		const key = event.target.getAttribute("data-key");
 
 		if (key === "backspace") {
-			$game.guesses[i] = guess.slice(0, -1);
+			$game.guesses[currentIndex] = guess.slice(0, -1);
 		} else if (guess.length < $game.wordLength) {
-			$game.guesses[i] += key;
+			$game.guesses[currentIndex] += key;
 		}
 	}
 
@@ -70,11 +68,18 @@
 	 * desktop users can use the keyboard to play the game
 	 */
 	function keydown(event) {
+		// console.log(event);
 		if (event.metaKey) return;
+		const key = event.key.toLowerCase();
+		const currentGuess = $game.guesses[currentIndex];
 
-		document
-			.querySelector(`[data-key="${event.key}" i]`)
-			?.dispatchEvent(new MouseEvent("click", { cancelable: true }));
+		if (key === "enter" && submittable) {
+			game.submit();
+		} else if (key === "backspace") {
+			$game.guesses[currentIndex] = currentGuess.slice(0, -1);
+		} else if (currentGuess.length < $game.wordLength && key.match(/^[\w]$/)) {
+			$game.guesses[currentIndex] += key;
+		}
 	}
 </script>
 
@@ -88,56 +93,69 @@
 <main>
 	<img src={Logo} alt="" class="logo" />
 
-	<p class="word-id">Thème: « {$game.theme} » | mot n°{$game.wordId + 1} sur {$game.totalWords}</p>
+	<p class="word-id">
+		Thème: « {$game.theme} » | mot n°{$game.wordId + 1} sur {$game.totalWords}
+	</p>
 
-	<form
-		method="POST"
-		use:enhance={() => {
-			// prevent default callback from resetting the form
-			return ({ update }) => {
-				update({ reset: false });
-			};
-		}}
-	>
-		<div class="grid" style="--row-length:{$game.wordLength}" class:playing={!won}>
-			{#each Array.from(Array($game.guesses.length).keys()) as row (row)}
-				{@const current = row === i}
-				<h2 class="visually-hidden">Row {row + 1}</h2>
-				<div class="row" class:current>
-					{#each Array.from(Array($game.wordLength).keys()) as column (column)}
-						{@const answer = $game.answers[row]?.[column]}
-						{@const value = $game.guesses[row]?.[column] ?? ""}
-						{@const selected = current && column === $game.guesses[row].length}
-						{@const exact = answer === "x"}
-						{@const close = answer === "c"}
-						{@const missing = answer === "_"}
-						<div
-							class="letter"
-							class:exact
-							class:close
-							class:missing
-							class:selected
-						>
-							{value}
-							<span class="visually-hidden">
-								{#if exact}
-									(correct)
-								{:else if close}
-									(present)
-								{:else if missing}
-									(absent)
-								{:else}
-									empty
-								{/if}
-							</span>
-							<input name="guess" disabled={!current} type="hidden" {value} />
-						</div>
-					{/each}
-				</div>
-			{/each}
+	<form>
+		<div class="grid-container">
+			<div
+				class="grid"
+				style="--row-length:{$game.wordLength};aspect-ratio:{$game.wordLength /
+					$game.guesses.length};"
+				class:playing={!won}
+			>
+				{#each Array.from(Array($game.guesses.length).keys()) as row (row)}
+					{@const current = row === currentIndex}
+					<h2 class="visually-hidden">Row {row + 1}</h2>
+					<div class="row" class:current>
+						{#each Array.from(Array($game.wordLength).keys()) as column (column)}
+							{@const answer = $game.answers[row]?.[column]}
+							{@const value = $game.guesses[row]?.[column] ?? ""}
+							{@const selected =
+								current && column === $game.guesses[row].length}
+							{@const exact = answer === "x"}
+							{@const close = answer === "c"}
+							{@const missing = answer === "_"}
+							<div
+								class="letter"
+								class:exact
+								class:close
+								class:missing
+								class:selected
+							>
+								{value}
+								<span class="visually-hidden">
+									{#if exact}
+										(correct)
+									{:else if close}
+										(present)
+									{:else if missing}
+										(absent)
+									{:else}
+										empty
+									{/if}
+								</span>
+								<input name="guess" disabled={!current} type="hidden" {value} />
+							</div>
+						{/each}
+					</div>
+				{/each}
+			</div>
 		</div>
 
-		<div class="controls">
+		<div class="winning-panel">
+			{#if won || $game.answers.length >= $game.guesses.length}
+				{#if !won && $game.answer}
+					<p>the answer was "{$game.originalAnswer}"</p>
+				{/if}
+				<button on:click|preventDefault={game.next}>
+					{won ? "you won :)" : `game over :(`} play again?
+				</button>
+			{/if}
+		</div>
+
+		<!-- <div class="controls">
 			{#if won || $game.answers.length >= $game.guesses.length}
 				{#if !won && $game.answer}
 					<p>the answer was "{$game.originalAnswer}"</p>
@@ -174,7 +192,7 @@
 									on:click|preventDefault={update}
 									data-key={letter}
 									class={classnames[letter]}
-									disabled={$game.guesses[i].length === $game.wordLength}
+									disabled={$game.guesses[currentIndex].length === $game.wordLength}
 									name="key"
 									value={letter}
 									aria-label="{letter} {description[letter] || ''}"
@@ -186,21 +204,20 @@
 					{/each}
 				</div>
 			{/if}
-		</div>
-
-		<div class="buttons">
-			<button on:click|preventDefault={game.next}>next</button>
-			<button on:click|preventDefault={game.reset}>reset</button>
-		</div>
+		</div> -->
 	</form>
+
+	<div class="buttons">
+		<button on:click|preventDefault={game.next}>next</button>
+		<button on:click|preventDefault={game.reset}>reset</button>
+	</div>
 
 	{#if won}
 		<div
-			style="position: absolute; left: 50%; top: 30%"
+			style="position: absolute; left: 50%; top: 30%;"
 			use:confetti={{
-				particleCount: $reduced_motion ? 0 : undefined,
 				force: 0.7,
-				stageWidth: window.innerWidth,
+				stageWidth: window.innerWidth + 200,
 				stageHeight: window.innerHeight,
 				colors: ["#ff3e00", "#40b3ff", "#676778"],
 			}}
@@ -209,14 +226,19 @@
 </main>
 
 <style>
+	/* Disable scroll bar when confettis pops */
+	:global(body) {
+		overflow: hidden;
+	}
+
 	main {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: 0.5rem;
-		width: 100%;
+		width: 100vw;
 		height: 100vh;
-		margin: 1rem auto;
+		padding: 0.5rem;
 		box-sizing: border-box;
 	}
 
@@ -229,33 +251,39 @@
 	}
 
 	form {
-		max-width: 100%;
+		flex-grow: 1;
+		width: 100%;
 		height: 100%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		gap: 1rem;
-		flex: 1;
+		gap: 5px;
+	}
+
+	.grid-container {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
 	}
 
 	.grid {
-		--width: min(100vw, 40vh, 380px);
-		max-width: var(--width);
-		align-self: center;
-		justify-self: center;
-		width: 100%;
+		/* aspect-ratio: ->> injected value */
+		max-width: 100%;
 		height: 100%;
+		min-height: 200px;
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-start;
+		justify-content: center;
+		gap: 0.2rem;
 	}
 
 	.grid .row {
 		display: grid;
 		grid-template-columns: repeat(var(--row-length), 1fr);
-		grid-gap: 0.2rem;
-		margin: 0 0 0.2rem 0;
+		gap: 0.2rem;
+		height: 100%;
 	}
 
 	.grid.playing .row.current {
@@ -263,8 +291,7 @@
 	}
 
 	.letter {
-		aspect-ratio: 1;
-		width: 100%;
+		/* aspect-ratio: 1; */
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -273,7 +300,7 @@
 		text-transform: lowercase;
 		border: none;
 		font-size: calc(0.08 * var(--width));
-		border-radius: 2px;
+		border-radius: 3px;
 		background: white;
 		margin: 0;
 		color: rgba(0, 0, 0, 0.7);
@@ -291,6 +318,7 @@
 
 	.letter.close {
 		border: 2px solid var(--color-theme-2);
+		border-radius: 100%;
 	}
 
 	.selected {
@@ -431,5 +459,11 @@
 		cursor: pointer;
 		color: #000;
 		border-color: #000;
+	}
+
+	.winning-panel {
+		height: 50px;
+		width: 100%;
+		flex-grow: 0;
 	}
 </style>
