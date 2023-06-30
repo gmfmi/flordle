@@ -8,6 +8,7 @@
 
 	/** Whether or not the user has won */
 	$: won = $game.answers.at(-1) === "x".repeat($game.wordLength);
+	$: endRound = won || $game.answers.length === $game.guesses.length;
 
 	/** The index of the current guess */
 	$: currentIndex = won ? -1 : $game.answers.length;
@@ -75,6 +76,8 @@
 
 		if (key === "enter" && submittable) {
 			game.submit();
+		} else if (key === "enter" && endRound) {
+			game.next();
 		} else if (key === "backspace") {
 			$game.guesses[currentIndex] = currentGuess.slice(0, -1);
 		} else if (currentGuess.length < $game.wordLength && key.match(/^[\w]$/)) {
@@ -101,8 +104,8 @@
 		<div class="grid-container">
 			<div
 				class="grid"
-				style="--row-length:{$game.wordLength};aspect-ratio:{$game.wordLength /
-					$game.guesses.length};"
+				style="--row-length:{$game.wordLength};aspect-ratio:{$game.wordLength}/{$game
+					.guesses.length};"
 				class:playing={!won}
 			>
 				{#each Array.from(Array($game.guesses.length).keys()) as row (row)}
@@ -144,67 +147,51 @@
 			</div>
 		</div>
 
-		<div class="winning-panel">
-			{#if won || $game.answers.length >= $game.guesses.length}
-				{#if !won && $game.answer}
-					<p>the answer was "{$game.originalAnswer}"</p>
-				{/if}
-				<button on:click|preventDefault={game.next}>
-					{won ? "you won :)" : `game over :(`} play again?
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="end-round-panel">
+			{#if endRound}
+				<button
+					on:click={game.next}
+					style="border-color: {won ? 'green' : 'red'};"
+				>
+					{#if won}
+						🥳 C'est gagné ! Tu as trouvé « {$game.originalAnswer} »
+					{:else}
+						🙊 Oups, perdu ! La réponse était « {$game.originalAnswer} »
+					{/if}
 				</button>
 			{/if}
 		</div>
 
-		<!-- <div class="controls">
-			{#if won || $game.answers.length >= $game.guesses.length}
-				{#if !won && $game.answer}
-					<p>the answer was "{$game.originalAnswer}"</p>
-				{/if}
+		<div class="controls">
+			<div class="keyboard">
 				<button
-					on:click|preventDefault={game.next}
 					data-key="enter"
-					class="restart selected"
+					class:selected={submittable}
+					disabled={!submittable}>enter</button
 				>
-					{won ? "you won :)" : `game over :(`} play again?
+
+				<button data-key="backspace" name="key" value="backspace">
+					back
 				</button>
-			{:else}
-				<div class="keyboard">
-					<button
-						on:click|preventDefault={game.submit}
-						data-key="enter"
-						class:selected={submittable}
-						disabled={!submittable}>enter</button
-					>
 
-					<button
-						on:click|preventDefault={update}
-						data-key="backspace"
-						name="key"
-						value="backspace"
-					>
-						back
-					</button>
-
-					{#each ["qwertyuiop", "asdfghjkl", "zxcvbnm"] as row}
-						<div class="row">
-							{#each row as letter}
-								<button
-									on:click|preventDefault={update}
-									data-key={letter}
-									class={classnames[letter]}
-									disabled={$game.guesses[currentIndex].length === $game.wordLength}
-									name="key"
-									value={letter}
-									aria-label="{letter} {description[letter] || ''}"
-								>
-									{letter}
-								</button>
-							{/each}
-						</div>
-					{/each}
-				</div>
-			{/if}
-		</div> -->
+				{#each ["azertyuiop", "qsdfghjklm", "wxcvbn"] as row}
+					<div class="row">
+						{#each row as letter}
+							<button
+								data-key={letter}
+								class={classnames[letter]}
+								name="key"
+								value={letter}
+								aria-label="{letter} {description[letter] || ''}"
+							>
+								{letter}
+							</button>
+						{/each}
+					</div>
+				{/each}
+			</div>
+		</div>
 	</form>
 
 	<div class="buttons">
@@ -227,9 +214,9 @@
 
 <style>
 	/* Disable scroll bar when confettis pops */
-	:global(body) {
+	/* :global(body) {
 		overflow: hidden;
-	}
+	} */
 
 	main {
 		display: flex;
@@ -262,17 +249,17 @@
 	}
 
 	.grid-container {
+		flex-grow: 1;
 		display: flex;
 		justify-content: center;
+		align-items: center;
 		width: 100%;
-		height: 100%;
+		/* height: 100%; */
 	}
 
 	.grid {
 		/* aspect-ratio: ->> injected value */
-		max-width: 100%;
-		height: 100%;
-		min-height: 200px;
+		height: 400px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -461,9 +448,20 @@
 		border-color: #000;
 	}
 
-	.winning-panel {
-		height: 50px;
+	.end-round-panel {
+		height: 100px;
 		width: 100%;
 		flex-grow: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.end-round-panel button {
+		border-color: var(--color-theme-2);
+		background-color: transparent;
+		padding: 20px 40px;
+		border-radius: 5px;
+		color: var(--color-text);
 	}
 </style>

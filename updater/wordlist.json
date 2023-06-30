@@ -41,5 +41,60 @@
       "planète",
       "satellite"
     ]
+  },
+  "150": {
+    "theme": "le camping",
+    "words": [
+      "ete",
+      "toile",
+      "marcel",
+      "pastis",
+      "bungalow",
+      "claquette"
+    ]
+  },
+  "151": {
+    "theme": "les fleurs",
+    "words": [
+      "racine",
+      "pétales",
+      "bourgeon",
+      "tournesol",
+      "cotylédon",
+      "pâquerette"
+    ]
+  },
+  "152": {
+    "theme": "menstruations",
+    "words": [
+      "sang",
+      "ovule",
+      "utérus",
+      "féminin",
+      "puberté",
+      "fécondité"
+    ]
+  },
+  "6-30": {
+    "theme": "pluie",
+    "words": [
+      "rosée",
+      "bottes",
+      "torrent",
+      "bruines",
+      "imperméable",
+      "précipitations"
+    ]
+  },
+  "7-1": {
+    "theme": "jeux de société",
+    "words": [
+      "pion",
+      "quête",
+      "bluff",
+      "pioche",
+      "tricheur",
+      "coopératif"
+    ]
   }
 }

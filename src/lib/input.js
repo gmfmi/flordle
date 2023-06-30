@@ -1,11 +1,11 @@
 export const gameInputs = {
-  "theme": "équateur",
+  "theme": "jeux de société",
   "words": [
-    "océan",
-    "volcan",
-    "amazonie",
-    "randonnée",
-    "moustiques",
-    "hémisphère"
+    "pion",
+    "quête",
+    "bluff",
+    "pioche",
+    "tricheur",
+    "coopératif"
   ]
 }

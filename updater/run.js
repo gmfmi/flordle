@@ -1,10 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import dayjs from 'dayjs';
-import dayOfYear from 'dayjs/plugin/dayOfYear.js';
 import utc from 'dayjs/plugin/utc.js';
 import timezone from 'dayjs/plugin/timezone.js'; // dependent on utc plugin
-dayjs.extend(dayOfYear);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -23,11 +21,13 @@ function getAllDays() {
 }
 
 function getToday(input) {
-  // const now = dayjs('2023-05-27').tz('Europe/Paris');
+  // const now = dayjs('2023-07-01').tz('Europe/Paris');
   const now = dayjs().tz('Europe/Paris');
-  const dayOfYear = now.dayOfYear();
-  console.log("Today number of the year:", dayOfYear);
-  return input[dayOfYear];
+  const today = `${now.month() + 1}-${now.date()}`; // format feb 23th -> "2-23" (no zero padding)
+  console.log("Today is:", today);
+  const payload = input[today];
+  if (payload === undefined) throw new Error(`Unable to find a payload for the day '${today}'`);
+  return payload;
 }
 
 function getPayloadFromTemplate(input) {
