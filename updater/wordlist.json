@@ -96,5 +96,60 @@
       "tricheur",
       "coopératif"
     ]
+  },
+  "7-5": {
+    "theme": "puzzle",
+    "words": [
+      "jeux",
+      "pièces",
+      "forcer",
+      "contour",
+      "décoration",
+      "frustration"
+    ]
+  },
+  "7-6": {
+    "theme": "anniversaire",
+    "words": [
+      "fête",
+      "cadeau",
+      "grandir",
+      "vieillir",
+      "surprise",
+      "confettis"
+    ]
+  },
+  "7-7": {
+    "theme": "générale",
+    "words": [
+      "alerte",
+      "société",
+      "bagarre",
+      "assemblée",
+      "cacophonie",
+      "indifférence"
+    ]
+  },
+  "7-8": {
+    "theme": "soleil",
+    "words": [
+      "uv",
+      "coup",
+      "rayon",
+      "fusion",
+      "chaleur",
+      "hydrogène"
+    ]
+  },
+  "7-9": {
+    "theme": "insectes",
+    "words": [
+      "dard",
+      "larve",
+      "mortel",
+      "piqures",
+      "grouille",
+      "pollinise"
+    ]
   }
 }
