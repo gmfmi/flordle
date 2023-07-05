@@ -50,28 +50,29 @@
 	}
 
 	/**
-	 * Modify the game state without making a trip to the server,
-	 * if client-side JavaScript is enabled
-	 */
-	function update(event) {
-		const guess = $game.guesses[currentIndex];
-		const key = event.target.getAttribute("data-key");
-
-		if (key === "backspace") {
-			$game.guesses[currentIndex] = guess.slice(0, -1);
-		} else if (guess.length < $game.wordLength) {
-			$game.guesses[currentIndex] += key;
-		}
-	}
-
-	/**
-	 * Trigger form logic in response to a keydown event, so that
-	 * desktop users can use the keyboard to play the game
+	 * Forward keywoard events to the main logic
 	 */
 	function keydown(event) {
 		// console.log(event);
 		if (event.metaKey) return;
-		const key = event.key.toLowerCase();
+		userAction(event.key);
+	}
+
+	/**
+	 * Forward events from the virtual keyboard to the actual logic
+	 * @param event
+	 */
+	function keyclicked(event) {
+		const key = event.target.getAttribute("data-key");
+		userAction(key);
+	}
+
+	/**
+	 * Main logic for user actions, using virtual or physical keyboard
+	 * @param key
+	 */
+	function userAction(key) {
+		key = key.toLowerCase();
 		const currentGuess = $game.guesses[currentIndex];
 
 		if (key === "enter" && submittable) {
@@ -166,12 +167,18 @@
 		<div class="controls">
 			<div class="keyboard">
 				<button
+					on:click|preventDefault={keyclicked}
 					data-key="enter"
 					class:selected={submittable}
 					disabled={!submittable}>enter</button
 				>
 
-				<button data-key="backspace" name="key" value="backspace">
+				<button
+					on:click|preventDefault={keyclicked}
+					data-key="backspace"
+					name="key"
+					value="backspace"
+				>
 					back
 				</button>
 
@@ -179,6 +186,7 @@
 					<div class="row">
 						{#each row as letter}
 							<button
+								on:click|preventDefault={keyclicked}
 								data-key={letter}
 								class={classnames[letter]}
 								name="key"
