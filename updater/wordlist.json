@@ -151,5 +151,71 @@
       "grouille",
       "pollinise"
     ]
+  },
+  "7-10": {
+    "theme": "carrelage",
+    "words": [
+      "carré",
+      "ciment",
+      "mozaïc",
+      "découpe",
+      "jointure",
+      "marbrure"
+    ]
+  },
+  "7-11": {
+    "theme": "eau",
+    "words": [
+      "pluie",
+      "salée",
+      "source",
+      "croupie",
+      "minérale",
+      "stagnante"
+    ]
+  },
+  "7-12": {
+    "theme": "blagues",
+    "words": [
+      "beauf",
+      "maman",
+      "humour",
+      "subtile",
+      "comedien",
+      "graveleuse"
+    ]
+  },
+  "7-13": {
+    "theme": "herbe",
+    "words": [
+      "brin",
+      "verte",
+      "racine",
+      "pelouse",
+      "fumette",
+      "mauvaise"
+    ]
+  },
+  "7-14": {
+    "theme": "feu d'artifice",
+    "words": [
+      "bleu",
+      "poudre",
+      "bouquet",
+      "mortier",
+      "explosion",
+      "pyrotechnie"
+    ]
+  },
+  "7-15": {
+    "theme": "grâce matinée",
+    "words": [
+      "midi",
+      "repos",
+      "tardif",
+      "ronfler",
+      "embrumé",
+      "mollasse"
+    ]
   }
 }
