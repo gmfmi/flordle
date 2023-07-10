@@ -157,9 +157,9 @@
     "words": [
       "carré",
       "ciment",
-      "mozaïc",
       "découpe",
       "jointure",
+      "mosaïque",
       "marbrure"
     ]
   },
@@ -216,6 +216,17 @@
       "ronfler",
       "embrumé",
       "mollasse"
+    ]
+  },
+  "7-16": {
+    "theme": "tournesol",
+    "words": [
+      "jaune",
+      "cycle",
+      "pétales",
+      "solaire",
+      "pivotante",
+      "mellifère"
     ]
   }
 }

@@ -4,9 +4,7 @@
 
 	import { game } from "./game-state";
 
-	$: {
-		console.log($game);
-	}
+	// $: {console.log($game);}
 
 	/** Whether or not the user has won */
 	$: won = $game.answers.at(-1) === "x".repeat($game.wordLength);
@@ -237,8 +235,8 @@
 	</div>
 
 	<div class="game-buttons">
-		<button on:click|preventDefault={game.next}>suivant</button>
-		<button on:click|preventDefault={game.reset}>reset</button>
+		<button on:click|preventDefault={ev => {game.next(), ev.target.blur()}}>suivant</button>
+		<button on:click|preventDefault={ev => {game.reset(), ev.target.blur()}}>reset</button>
 	</div>
 
 	{#if won}
@@ -266,7 +264,7 @@
 	}
 
 	.logo {
-		max-width: 320px;
+		max-width: min(100%, 320px);
 	}
 
 	.info p {
@@ -326,6 +324,7 @@
 		text-transform: lowercase;
 		border: none;
 		font-size: 150%;
+		font-size: min(4vw, 24px);
 		font-weight: 300;
 		font-family: var(--font-mono);
 		border-radius: 3px;
@@ -367,6 +366,7 @@
 		/* injected: --endround-color  */
 		display: flex;
 		backdrop-filter: blur(0.3rem);
+		background-color: rgba(255, 255, 255, 0.4);
 		border: 3px solid var(--endround-color);
 		border-radius: 7px;
 		width: 100%;
@@ -408,6 +408,7 @@
 		gap: 0.18rem;
 		justify-content: center;
 		font-family: var(--font-mono);
+		font-size: min(4vw, 20px);
 	}
 
 	.hotkeys {
@@ -446,9 +447,8 @@
 
 	.keyboard button,
 	.keyboard button:disabled {
-		height: calc(var(--size) * 1.3);
-		aspect-ratio: 0.8;
-		font-weight: 400;
+		height: 3rem;
+		padding: 0;
 	}
 
 	.controls button.empty {
@@ -461,7 +461,8 @@
 	}
 
 	.controls button.missing {
-		opacity: 0.5;
+		opacity: 0.4;
+		color: #9a9a9a;
 	}
 
 	.controls button.close {
