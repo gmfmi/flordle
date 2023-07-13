@@ -1,5 +1,5 @@
 {
-  "146": {
+  "6-23": {
     "theme": "équateur",
     "words": [
       "océan",
@@ -10,7 +10,7 @@
       "hémisphère"
     ]
   },
-  "147": {
+  "6-24": {
     "theme": "surf",
     "words": [
       "vent",
@@ -20,7 +20,7 @@
       "planche"
     ]
   },
-  "148": {
+  "6-25": {
     "theme": "plage",
     "words": [
       "mer",
@@ -31,7 +31,7 @@
       "serviette"
     ]
   },
-  "149": {
+  "6-26": {
     "theme": "espace",
     "words": [
       "lune",
@@ -42,7 +42,7 @@
       "satellite"
     ]
   },
-  "150": {
+  "6-27": {
     "theme": "le camping",
     "words": [
       "ete",
@@ -53,7 +53,7 @@
       "claquette"
     ]
   },
-  "151": {
+  "6-28": {
     "theme": "les fleurs",
     "words": [
       "racine",
@@ -64,7 +64,7 @@
       "pâquerette"
     ]
   },
-  "152": {
+  "6-29": {
     "theme": "menstruations",
     "words": [
       "sang",
@@ -96,6 +96,18 @@
       "tricheur",
       "coopératif"
     ]
+  },
+  "7-2": {
+    "theme": "",
+    "words": []
+  },
+  "7-3": {
+    "theme": "",
+    "words": []
+  },
+  "7-4": {
+    "theme": "",
+    "words": []
   },
   "7-5": {
     "theme": "puzzle",
@@ -227,6 +239,72 @@
       "solaire",
       "pivotante",
       "mellifère"
+    ]
+  },
+  "7-17": {
+    "theme": "vacances",
+    "words": [
+      "été",
+      "plage",
+      "azure",
+      "famille",
+      "scolaire",
+      "farniente"
+    ]
+  },
+  "7-18": {
+    "theme": "musique",
+    "words": [
+      "note",
+      "solo",
+      "piano",
+      "impro",
+      "arpège",
+      "staccato"
+    ]
+  },
+  "7-19": {
+    "theme": "street food",
+    "words": [
+      "kebab",
+      "burger",
+      "poutine",
+      "falafel",
+      "sandwich",
+      "boulettes"
+    ]
+  },
+  "7-20": {
+    "theme": "vêtements",
+    "words": [
+      "jupe",
+      "polos",
+      "corset",
+      "boubou",
+      "sarouel",
+      "djellaba"
+    ]
+  },
+  "7-21": {
+    "theme": "bouteille",
+    "words": [
+      "mer",
+      "verre",
+      "capuchon",
+      "extrudée",
+      "consignée",
+      "nabuchodonosor"
+    ]
+  },
+  "7-22": {
+    "theme": "moustique",
+    "words": [
+      "aile",
+      "pique",
+      "chiant",
+      "réveil",
+      "propage",
+      "chocolat"
     ]
   }
 }

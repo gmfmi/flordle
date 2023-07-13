@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "node updater/run.js && vite build",
+		"build": "date && node updater/run.js && vite build",
 		"preview": "vite preview"
 	},
 	"devDependencies": {
