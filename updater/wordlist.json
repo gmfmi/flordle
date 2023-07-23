@@ -317,5 +317,93 @@
       "encoller",
       "galandage"
     ]
+  },
+  "7-24": {
+    "theme": "poisson",
+    "words": [
+      "arête",
+      "écaille",
+      "hameçon",
+      "saumonée",
+      "nageoire",
+      "branchies"
+    ]
+  },
+  "7-25": {
+    "theme": "chiffre",
+    "words": [
+      "pair",
+      "arabe",
+      "romain",
+      "premier",
+      "fétiche",
+      "numéraire"
+    ]
+  },
+  "7-26": {
+    "theme": "sirop",
+    "words": [
+      "toux",
+      "agave",
+      "saveurs",
+      "cocktail",
+      "liquoreux",
+      "grenadine"
+    ]
+  },
+  "7-27": {
+    "theme": "muscle",
+    "words": [
+      "tissu",
+      "tendon",
+      "organe",
+      "flexion",
+      "extension",
+      "vasculaire"
+    ]
+  },
+  "7-28": {
+    "theme": "zoo",
+    "words": [
+      "lion",
+      "animal",
+      "triste",
+      "clôture",
+      "visiteur",
+      "captivité"
+    ]
+  },
+  "7-29": {
+    "theme": "heure",
+    "words": [
+      "pile",
+      "marées",
+      "gloire",
+      "pendule",
+      "retardée",
+      "décalage"
+    ]
+  },
+  "7-30": {
+    "theme": "plantes",
+    "words": [
+      "pot",
+      "graine",
+      "racine",
+      "terreau",
+      "oxygène",
+      "grimpante"
+    ]
+  },
+  "7-31": {
+    "theme": "vigneron",
+    "words": [
+      "fût",
+      "boisé",
+      "cépage",
+      "récolte",
+      "bouchonné",
+      "indépendant"
+    ]
   }
 }
