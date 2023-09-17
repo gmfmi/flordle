@@ -405,5 +405,32 @@
       "bouchonné",
       "indépendant"
     ]
+  },
+  "ATTENTION": "!! TROU DE DONNEE",
+  "9-17": {
+    "theme": "planche",
+    "words": [
+      "surf",
+      "pizza",
+      "palet",
+      "voile",
+      "tapas",
+      "langer",
+      "découpéé",
+      "roulette",
+      "repasser",
+      "saucisson"
+    ]
+  },
+  "9-18": {
+    "theme": "gourmet",
+    "words": [
+      "étoilé",
+      "finesse",
+      "gustatif",
+      "dressage",
+      "culinaire",
+      "oenologue"
+    ]
   }
 }
