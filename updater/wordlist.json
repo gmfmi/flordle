@@ -407,7 +407,18 @@
     ]
   },
   "ATTENTION": "!! TROU DE DONNEE",
-  "9-17": {
+  "9-18": {
+    "theme": "gourmet",
+    "words": [
+      "étoilé",
+      "finesse",
+      "gustatif",
+      "dressage",
+      "culinaire",
+      "oenologue"
+    ]
+  },
+  "9-19": {
     "theme": "planche",
     "words": [
       "surf",
@@ -420,17 +431,6 @@
       "roulette",
       "repasser",
       "saucisson"
-    ]
-  },
-  "9-18": {
-    "theme": "gourmet",
-    "words": [
-      "étoilé",
-      "finesse",
-      "gustatif",
-      "dressage",
-      "culinaire",
-      "oenologue"
     ]
   }
 }
