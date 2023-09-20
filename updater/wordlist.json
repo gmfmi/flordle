@@ -432,5 +432,75 @@
       "repasser",
       "saucisson"
     ]
+  },
+  "9-20": {
+    "theme": "rouge",
+    "words": [
+      "vin",
+      "peau",
+      "tulipe",
+      "taureau",
+      "carotide"
+    ]
+  },
+  "9-21": {
+    "theme": "rugby",
+    "words": [
+      "stade",
+      "mélée",
+      "ovalie",
+      "gaillard",
+      "haka"
+    ]
+  },
+  "9-22": {
+    "theme": "pompiers",
+    "words": [
+      "danger",
+      "flamme",
+      "uniforme",
+      "gyrophare",
+      "string"
+    ]
+  },
+  "9-23": {
+    "theme": "lumière",
+    "words": [
+      "jour",
+      "lumen",
+      "ampoule",
+      "reflète",
+      "diffraction"
+    ]
+  },
+  "9-24": {
+    "theme": "ponts",
+    "words": [
+      "arc",
+      "voute",
+      "poutre",
+      "hauban",
+      "suspendu"
+    ]
+  },
+  "9-25": {
+    "theme": "sous-marin",
+    "words": [
+      "sonar",
+      "ballasts",
+      "nucléaire",
+      "périscope",
+      "submersion"
+    ]
+  },
+  "9-26": {
+    "theme": "couettes",
+    "words": [
+      "duvet",
+      "border",
+      "housse",
+      "acariens",
+      "garnissage"
+    ]
   }
 }
